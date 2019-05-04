@@ -208,92 +208,106 @@ namespace WindowsFormsApp1
         private void bt_excel_Click(object sender, EventArgs e)
         {
             {
-                saveFileDialog1.Title = "Guardar"; // nombre de la ventana
-                saveFileDialog1.FileName = "prueba.xlsx"; // nombre del archivo
-                saveFileDialog1.InitialDirectory = @"C:\Users\Monge\source\repos\WindowsFormsApp1\prueba"; // direccion inicial
-                saveFileDialog1.Filter = "archivo excel |prueba.xlsx"; // tipo de archivo(formato)
-                saveFileDialog1.ShowDialog();
-
-                string archivo;
-                archivo = saveFileDialog1.FileName;
-                MessageBox.Show(archivo);
-
-                var workbook = new XLWorkbook();
-                var hoja = workbook.Worksheets.Add("Alumnos");
-                hoja.Cell(1, 1).Value = "Matricula";
-                hoja.Cell(1, 1).Style.Font.Bold = true;
-                hoja.Cell(1, 2).Value = "Apellido P";
-                hoja.Cell(1, 2).Style.Font.Bold = true;
-                hoja.Cell(1, 3).Value = "Apellido M";
-                hoja.Cell(1, 3).Style.Font.Bold = true;
-                hoja.Cell(1, 4).Value = "Nombre";
-                hoja.Cell(1, 4).Style.Font.Bold = true;
-                hoja.Cell(1, 5).Value = "fechadenacimento";
-                hoja.Cell(1, 5).Style.Font.Bold = true;
-                hoja.Cell(1, 6).Value = "Correo";
-                hoja.Cell(1, 6).Style.Font.Bold = true;
-                hoja.Cell(1, 7).Value = "Telefono";
-                hoja.Cell(1, 7).Style.Font.Bold = true;
-                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                try
                 {
-                    for (int k = 0; k < dataGridView1.Columns.Count; k++)
+                    saveFileDialog1.Title = "Guardar"; // nombre de la ventana
+                    saveFileDialog1.FileName = "prueba.xlsx"; // nombre del archivo
+                    saveFileDialog1.InitialDirectory = @"C:\Users\Monge\source\repos\WindowsFormsApp1\prueba"; // direccion inicial
+                    saveFileDialog1.Filter = "archivo excel |prueba.xlsx"; // tipo de archivo(formato)
+                    saveFileDialog1.ShowDialog();
+
+                    string archivo;
+                    archivo = saveFileDialog1.FileName;
+                    MessageBox.Show(archivo);
+
+                    var workbook = new XLWorkbook();
+                    var hoja = workbook.Worksheets.Add("Alumnos");
+                    hoja.Cell(1, 1).Value = "Matricula";
+                    hoja.Cell(1, 1).Style.Font.Bold = true;
+                    hoja.Cell(1, 2).Value = "Apellido P";
+                    hoja.Cell(1, 2).Style.Font.Bold = true;
+                    hoja.Cell(1, 3).Value = "Apellido M";
+                    hoja.Cell(1, 3).Style.Font.Bold = true;
+                    hoja.Cell(1, 4).Value = "Nombre";
+                    hoja.Cell(1, 4).Style.Font.Bold = true;
+                    hoja.Cell(1, 5).Value = "fechadenacimento";
+                    hoja.Cell(1, 5).Style.Font.Bold = true;
+                    hoja.Cell(1, 6).Value = "Correo";
+                    hoja.Cell(1, 6).Style.Font.Bold = true;
+                    hoja.Cell(1, 7).Value = "Telefono";
+                    hoja.Cell(1, 7).Style.Font.Bold = true;
+                    for (int i = 0; i < dataGridView1.Rows.Count; i++)
                     {
-                        hoja.Cell((i+2), (k+1)).Value = dataGridView1.Rows[i].Cells[k].Value.ToString();
+                        for (int k = 0; k < dataGridView1.Columns.Count; k++)
+                        {
+                            hoja.Cell((i + 2), (k + 1)).Value = dataGridView1.Rows[i].Cells[k].Value.ToString();
+                        }
                     }
+                    //hoja.Cell(1, 1).Value="lo que tu quieras";
+                    workbook.SaveAs(archivo);
                 }
-                //hoja.Cell(1, 1).Value="lo que tu quieras";
-                workbook.SaveAs(archivo);
+                catch(Exception error)
+                {
+                    MessageBox.Show(error + "");
+                }
             }
         }
 
         private void bjson_Click(object sender, EventArgs e)
         {
             {
-                saveFileDialog1.Title = "Guardar"; // nombre de la ventana
-                saveFileDialog1.FileName = "prueba.json"; // nombre del archivo
-                saveFileDialog1.InitialDirectory = @"C:\Users\Monge\source\repos\WindowsFormsApp1\prueba"; // direccion inicial
-                saveFileDialog1.Filter = "archivo json |prueba.json"; // tipo de archivo(formato)
-                saveFileDialog1.ShowDialog();
-
-                string archivo;
-                archivo = saveFileDialog1.FileName;
-                MessageBox.Show(archivo);
-
-                StreamWriter writer = new StreamWriter(archivo);
-                writer.WriteLine ("{ \"sistema_escolar\" :");
-                writer.WriteLine("\t{");
-                writer.WriteLine("\t\t\"alumnos\": [");
-                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                try
                 {
-                    if ((i+1) == dataGridView1.Rows.Count)
-                    {
-                        writer.WriteLine("\t\t{\n" + ("\t\t\t\"Matricula\":" + dataGridView1[0, i].Value.ToString() + ","
-                            + "\n\t\t\t\"Apellido P\":" +"\"" + dataGridView1[1, i].Value.ToString()+ "\"," 
-                            + "\n\t\t\t\"Apellido M\":" + "\""+ dataGridView1[2, i].Value.ToString() + "\","
-                            + "\n\t\t\t\"Nombre\":" + "\""+dataGridView1[3, i].Value.ToString()+ "\","
-                            +  "\n\t\t\t\"Fecha de nacmiento\":" + "\"" 
-                            + Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Year + "-" + Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Month + "-" + Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Day + "\"," 
-                            + "\n\t\t\t\"Correo\":" + "\"" +dataGridView1[5, i].Value.ToString() + "\"," 
-                            + "\n\t\t\t\"Telefono\":" + dataGridView1[6, i].Value.ToString() + "," + "\n\t\t}"));
+                    saveFileDialog1.Title = "Guardar"; // nombre de la ventana
+                    saveFileDialog1.FileName = "prueba.json"; // nombre del archivo
+                    saveFileDialog1.InitialDirectory = @"C:\Users\Monge\source\repos\WindowsFormsApp1\prueba"; // direccion inicial
+                    saveFileDialog1.Filter = "archivo json |prueba.json"; // tipo de archivo(formato)
+                    saveFileDialog1.ShowDialog();
 
-                    }
-                    else
-                    {
-                        writer.WriteLine("\t\t{\n" + ("\t\t\t\"Matricula\":" + dataGridView1[0, i].Value.ToString() + "," 
-                            + "\n\t\t\t\"Apellido P\":" + "\""+ dataGridView1[1, i].Value.ToString() + "\"," 
-                            + "\n\t\t\t\"Apellido M\":" + "\""+dataGridView1[2, i].Value.ToString() + "\","
-                            + "\n\t\t\t\"Nombre\":" + "\""+dataGridView1[3, i].Value.ToString()+ "\"," 
-                            + "\n\t\t\t\"Fecha de nacmiento\":" + "\"" 
-                            + Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Year + "-" + Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Month + "-" + Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Day + "\"," 
-                            + "\n\t\t\t\"Correo\":" + "\""+ dataGridView1[5, i].Value.ToString() + "\"," 
-                            + "\n\t\t\t\"Telefono\":" + dataGridView1[6, i].Value.ToString() + "," + "\n\t\t},"));
+                    string archivo;
+                    archivo = saveFileDialog1.FileName;
+                    MessageBox.Show(archivo);
 
+                    StreamWriter writer = new StreamWriter(archivo);
+                    writer.WriteLine("{ \"sistema_escolar\" :");
+                    writer.WriteLine("\t{");
+                    writer.WriteLine("\t\t\"alumnos\": [");
+                    for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                    {
+                        if ((i + 1) == dataGridView1.Rows.Count)
+                        {
+                            writer.WriteLine("\t\t{\n" + ("\t\t\t\"Matricula\":" + dataGridView1[0, i].Value.ToString() + ","
+                                + "\n\t\t\t\"Apellido P\":" + "\"" + dataGridView1[1, i].Value.ToString() + "\","
+                                + "\n\t\t\t\"Apellido M\":" + "\"" + dataGridView1[2, i].Value.ToString() + "\","
+                                + "\n\t\t\t\"Nombre\":" + "\"" + dataGridView1[3, i].Value.ToString() + "\","
+                                + "\n\t\t\t\"Fecha de nacmiento\":" + "\""
+                                + Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Year + "-" + Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Month + "-" + Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Day + "\","
+                                + "\n\t\t\t\"Correo\":" + "\"" + dataGridView1[5, i].Value.ToString() + "\","
+                                + "\n\t\t\t\"Telefono\":" + dataGridView1[6, i].Value.ToString() + "," + "\n\t\t}"));
+
+                        }
+                        else
+                        {
+                            writer.WriteLine("\t\t{\n" + ("\t\t\t\"Matricula\":" + dataGridView1[0, i].Value.ToString() + ","
+                                + "\n\t\t\t\"Apellido P\":" + "\"" + dataGridView1[1, i].Value.ToString() + "\","
+                                + "\n\t\t\t\"Apellido M\":" + "\"" + dataGridView1[2, i].Value.ToString() + "\","
+                                + "\n\t\t\t\"Nombre\":" + "\"" + dataGridView1[3, i].Value.ToString() + "\","
+                                + "\n\t\t\t\"Fecha de nacmiento\":" + "\""
+                                + Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Year + "-" + Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Month + "-" + Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Day + "\","
+                                + "\n\t\t\t\"Correo\":" + "\"" + dataGridView1[5, i].Value.ToString() + "\","
+                                + "\n\t\t\t\"Telefono\":" + dataGridView1[6, i].Value.ToString() + "," + "\n\t\t},"));
+
+                        }
                     }
+                    writer.WriteLine("\t\t\t\t ]");
+                    writer.WriteLine("\t}");
+                    writer.WriteLine("}");
+                    writer.Close();
                 }
-                writer.WriteLine("\t\t\t\t ]");
-                writer.WriteLine("\t}");
-                writer.WriteLine("}");
-                writer.Close();
+                catch(Exception error)
+                {
+                    MessageBox.Show("" + error);
+                }
             }
         }
 
