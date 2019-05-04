@@ -11,6 +11,8 @@ using MySql.Data.MySqlClient;
 using System.IO;
 using ClosedXML.Excel;
 using System.Runtime.InteropServices;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 
 
 namespace WindowsFormsApp1
@@ -307,7 +309,55 @@ namespace WindowsFormsApp1
 
         private void bt_pdf_Click(object sender, EventArgs e)
         {
+            {
+                try
+                {
+                    saveFileDialog1.Title = "Guardar"; // nombre de la ventana
+                    saveFileDialog1.FileName = "prueba.pdf"; // nombre del archivo
+                    saveFileDialog1.InitialDirectory = @"C:\Users\Monge\source\repos\WindowsFormsApp1\prueba"; // direccion inicial
+                    saveFileDialog1.Filter = "archivo pdf |prueba.pdf"; // tipo de archivo(formato)
+                    saveFileDialog1.ShowDialog();
 
+                    string archivo;
+                    archivo = saveFileDialog1.FileName;
+                    MessageBox.Show(archivo);
+
+                    Document lol = new Document(iTextSharp.text.PageSize.LETTER.Rotate());
+                    PdfWriter.GetInstance(lol, new FileStream(saveFileDialog1.FileName, FileMode.Create));
+                    lol.Open();
+                    PdfPTable tablepdf = new PdfPTable(7);
+                    PdfPCell titulo = new PdfPCell(new Phrase("Alumnos"));
+                    titulo.Colspan = 7;
+                    tablepdf.AddCell(titulo);
+                    
+
+                    tablepdf.AddCell("Matricula");
+                    tablepdf.AddCell("Apellido Paterno");
+                    tablepdf.AddCell("Apellido Materno");
+                    tablepdf.AddCell("Nombre");
+                    tablepdf.AddCell("Fecha de nacimiento");
+                    tablepdf.AddCell("Correo");
+                    tablepdf.AddCell("Telefono");
+                    for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                    {
+                        tablepdf.AddCell(dataGridView1[0,i].Value.ToString());
+                        tablepdf.AddCell(dataGridView1[1, i].Value.ToString());
+                        tablepdf.AddCell(dataGridView1[2, i].Value.ToString());
+                        tablepdf.AddCell(dataGridView1[3, i].Value.ToString());
+                        tablepdf.AddCell(dataGridView1[4, i].Value.ToString());
+                        tablepdf.AddCell(dataGridView1[5, i].Value.ToString());
+                        tablepdf.AddCell(dataGridView1[6, i].Value.ToString());
+                    }
+
+                    lol.Add(tablepdf);
+                    lol.Close();
+                }
+
+                catch (Exception error)
+                {
+                    MessageBox.Show(error+"");
+                }
+            }
         }
     }
 }
