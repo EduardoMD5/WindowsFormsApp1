@@ -47,7 +47,6 @@
             this.tel = new System.Windows.Forms.TextBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.bt_pdf = new System.Windows.Forms.Button();
-            this.bt_word = new System.Windows.Forms.Button();
             this.bt_sql = new System.Windows.Forms.Button();
             this.bt_csv = new System.Windows.Forms.Button();
             this.bt_excel = new System.Windows.Forms.Button();
@@ -239,18 +238,6 @@
             this.bt_pdf.UseVisualStyleBackColor = true;
             this.bt_pdf.Click += new System.EventHandler(this.bt_pdf_Click);
             // 
-            // bt_word
-            // 
-            this.bt_word.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_word.BackgroundImage")));
-            this.bt_word.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.bt_word.FlatAppearance.BorderSize = 0;
-            this.bt_word.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bt_word.Location = new System.Drawing.Point(245, 349);
-            this.bt_word.Name = "bt_word";
-            this.bt_word.Size = new System.Drawing.Size(65, 70);
-            this.bt_word.TabIndex = 20;
-            this.bt_word.UseVisualStyleBackColor = true;
-            // 
             // bt_sql
             // 
             this.bt_sql.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_sql.BackgroundImage")));
@@ -296,7 +283,7 @@
             this.bjson.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.bjson.FlatAppearance.BorderSize = 0;
             this.bjson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bjson.Location = new System.Drawing.Point(17, 437);
+            this.bjson.Location = new System.Drawing.Point(245, 349);
             this.bjson.Name = "bjson";
             this.bjson.Size = new System.Drawing.Size(65, 70);
             this.bjson.TabIndex = 26;
@@ -344,7 +331,6 @@
             this.panel2.Controls.Add(this.bjson);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.bt_pdf);
-            this.panel2.Controls.Add(this.bt_word);
             this.panel2.Controls.Add(this.btnredondo2);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.label3);
@@ -439,7 +425,6 @@
         private System.Windows.Forms.TextBox tel;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button bt_pdf;
-        private System.Windows.Forms.Button bt_word;
         private System.Windows.Forms.Button bt_sql;
         private System.Windows.Forms.Button bt_csv;
         private System.Windows.Forms.Button bt_excel;

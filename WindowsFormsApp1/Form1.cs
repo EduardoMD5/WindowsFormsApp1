@@ -66,30 +66,37 @@ namespace WindowsFormsApp1
 
         private void bt_sql_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.Title = "npi"; // nombre de la ventana
-            saveFileDialog1.FileName = "*.sql"; // nombre del archivo
-            saveFileDialog1.InitialDirectory = @"C:\Users\Monge\source\repos\WindowsFormsApp1\prueba"; // direccion inicial
-            saveFileDialog1.Filter = "archivo sql |*.sql"; // tipo de archivo(formato)
-            saveFileDialog1.ShowDialog();
-
-            string archivo;
-            archivo = saveFileDialog1.FileName;
-            MessageBox.Show(archivo);
-
-            StreamWriter writer = new StreamWriter(archivo);
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            try
             {
-                writer.WriteLine("INSERT INTO alumnos (matricula,ap1,ap2,nombre,fechadenacimento,correo,telefono) VALUES ("+( dataGridView1[0,i].Value.ToString() +",'"+ dataGridView1[1,i].Value.ToString() + "','" + dataGridView1[2, i].Value.ToString() + "','" + dataGridView1[3, i].Value.ToString() + "','" + Convert.ToDateTime(dataGridView1[4,i].Value.ToString()).Year +"-"+ Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Month + "-" + Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Day + "','" + dataGridView1[5, i].Value.ToString() + "'," + dataGridView1[6, i].Value.ToString() +");"));
+                saveFileDialog1.Title = "npi"; // nombre de la ventana
+                saveFileDialog1.FileName = "respaldo.sql"; // nombre del archivo
+                saveFileDialog1.InitialDirectory = @"C:\Users\Monge\source\repos\WindowsFormsApp1\prueba"; // direccion inicial
+                saveFileDialog1.Filter = "archivo sql |respaldo.sql"; // tipo de archivo(formato)
+                saveFileDialog1.ShowDialog();
+
+                string archivo;
+                archivo = saveFileDialog1.FileName;
+                MessageBox.Show(archivo);
+
+                StreamWriter writer = new StreamWriter(archivo);
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    writer.WriteLine("INSERT INTO alumnos (matricula,ap1,ap2,nombre,fechadenacimento,correo,telefono) VALUES (" + (dataGridView1[0, i].Value.ToString() + ",'" + dataGridView1[1, i].Value.ToString() + "','" + dataGridView1[2, i].Value.ToString() + "','" + dataGridView1[3, i].Value.ToString() + "','" + Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Year + "-" + Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Month + "-" + Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Day + "','" + dataGridView1[5, i].Value.ToString() + "'," + dataGridView1[6, i].Value.ToString() + ");"));
+                }
+                writer.Close();
             }
-            writer.Close();
+            catch (Exception error)
+            {
+                MessageBox.Show(error + "");
+            }
         }
 
         private void bt_csv_Click(object sender, EventArgs e)
         {
             saveFileDialog1.Title = "npi"; // nombre de la ventana
-            saveFileDialog1.FileName = "*.csv"; // nombre del archivo
+            saveFileDialog1.FileName = "csv.csv"; // nombre del archivo
             saveFileDialog1.InitialDirectory = @"C:\Users\Monge\source\repos\WindowsFormsApp1\prueba"; // direccion inicial
-            saveFileDialog1.Filter = "archivo sql |*.csv"; // tipo de archivo(formato)
+            saveFileDialog1.Filter = "archivo sql csv.csv"; // tipo de archivo(formato)
             saveFileDialog1.ShowDialog();
 
             string archivo;
@@ -187,7 +194,6 @@ namespace WindowsFormsApp1
             bordes.BorderRedondoButton(bt_csv);
             bordes.BorderRedondoButton(bt_pdf);
             bordes.BorderRedondoButton(bt_excel);
-            bordes.BorderRedondoButton(bt_word);
             bordes.BorderRedondoButton(bt_sql);
             bordes.BorderRedondoButton(bjson);
         }
