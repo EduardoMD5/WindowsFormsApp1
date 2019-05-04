@@ -93,36 +93,43 @@ namespace WindowsFormsApp1
 
         private void bt_csv_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.Title = "npi"; // nombre de la ventana
-            saveFileDialog1.FileName = "csv.csv"; // nombre del archivo
-            saveFileDialog1.InitialDirectory = @"C:\Users\Monge\source\repos\WindowsFormsApp1\prueba"; // direccion inicial
-            saveFileDialog1.Filter = "archivo sql csv.csv"; // tipo de archivo(formato)
-            saveFileDialog1.ShowDialog();
-
-            string archivo;
-            archivo = saveFileDialog1.FileName;
-            MessageBox.Show(archivo);
-
-            StreamWriter writer = new StreamWriter(archivo);
-            for (int i = 0; i < dataGridView1.ColumnCount; i++)
+            try
             {
-                if ((i+1) == dataGridView1.ColumnCount)
+                saveFileDialog1.Title = "npi"; // nombre de la ventana
+                saveFileDialog1.FileName = "csv.csv"; // nombre del archivo
+                saveFileDialog1.InitialDirectory = @"C:\Users\Monge\source\repos\WindowsFormsApp1\prueba"; // direccion inicial
+                saveFileDialog1.Filter = "archivo sql csv.csv"; // tipo de archivo(formato)
+                saveFileDialog1.ShowDialog();
+
+                string archivo;
+                archivo = saveFileDialog1.FileName;
+                MessageBox.Show(archivo);
+
+                StreamWriter writer = new StreamWriter(archivo);
+                for (int i = 0; i < dataGridView1.ColumnCount; i++)
                 {
-                    writer.Write(dataGridView1.Columns[i].HeaderText +'\n');
+                    if ((i + 1) == dataGridView1.ColumnCount)
+                    {
+                        writer.Write(dataGridView1.Columns[i].HeaderText + '\n');
+                    }
+
+                    else
+                    {
+                        writer.Write(dataGridView1.Columns[i].HeaderText + ";");
+                    }
+
                 }
 
-                else
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
-                    writer.Write(dataGridView1.Columns[i].HeaderText + ";");
+                    writer.WriteLine((dataGridView1[0, i].Value.ToString() + ";" + dataGridView1[1, i].Value.ToString() + ";" + dataGridView1[2, i].Value.ToString() + ";" + dataGridView1[3, i].Value.ToString() + ";" + Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Year + "-" + Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Month + "-" + Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Day + ";" + dataGridView1[5, i].Value.ToString() + ";" + dataGridView1[6, i].Value.ToString()));
                 }
-
+                writer.Close();
             }
-
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            catch(Exception error)
             {
-                writer.WriteLine((dataGridView1[0, i].Value.ToString() + ";" + dataGridView1[1, i].Value.ToString() + ";" + dataGridView1[2, i].Value.ToString() + ";" + dataGridView1[3, i].Value.ToString() + ";" + Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Year + "-" + Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Month + "-" + Convert.ToDateTime(dataGridView1[4, i].Value.ToString()).Day + ";" + dataGridView1[5, i].Value.ToString() + ";" + dataGridView1[6, i].Value.ToString()));
+                MessageBox.Show(error + "");
             }
-            writer.Close();
         }
 
         private void btnredondo1_Click(object sender, EventArgs e)
